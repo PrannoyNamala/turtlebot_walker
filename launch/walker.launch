@@ -1,0 +1,12 @@
+<launch>
+	
+	<arg name="record" default="0"/>
+	<arg name="duration" default="20"/>
+
+	<include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch">
+	</include>
+
+	<node pkg="walker" name="walker" type="walker" output="screen" />
+        <node pkg="rosbag" name="turtle_bag" type="record" args="--all --output-name=$(find walker)/results/walker.bag -x /camera/(.*) --duration=$(arg duration)" if="$(arg record)"/>
+
+</launch>

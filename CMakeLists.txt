@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(walker)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -12,6 +12,13 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   turtlebot3_msgs
+  message_generation
+  tf
+)
+
+generate_messages(
+ DEPENDENCIES
+ std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -117,9 +124,12 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
+
+add_executable(walker src/main.cpp src/walker.cpp)
+target_link_libraries(walker ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
