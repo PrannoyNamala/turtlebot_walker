@@ -34,8 +34,11 @@
 
 #ifndef INCLUDE_WALKER_HPP_
 #define INCLUDE_WALKER_HPP_
+// cppcheck-suppress missingInclude
 #include "ros/ros.h"
+// cppcheck-suppress missingInclude
 #include "sensor_msgs/LaserScan.h"
+// cppcheck-suppress missingInclude
 #include "geometry_msgs/Twist.h"
 
 

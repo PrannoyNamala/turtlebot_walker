@@ -32,10 +32,15 @@
 * @copyright MIT License (c) 2021 Prannoy Namala
 */
 
+// cppcheck-suppress missingInclude
 #include <array>
+// cppcheck-suppress missingInclude
 #include "ros/ros.h"
+// cppcheck-suppress missingInclude
 #include "sensor_msgs/LaserScan.h"
+// cppcheck-suppress missingInclude
 #include "geometry_msgs/Twist.h"
+// cppcheck-suppress missingInclude
 #include "walker.hpp"
 
 
@@ -67,7 +72,8 @@ Walker::~Walker() {
 void Walker::checkObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
     // Iterate over range values
     collisionFlag = false;
-    std::array<int,15> indices = {0,1,2,3,4,5,6,7,17,18,19,20,21,22,23};
+    std::array<int, 15> indices = {0, 1, 2, 3, 4, 5, 6, 7, 17,
+        18, 19, 20, 21, 22, 23};
     for (auto i : indices) {
      if ( msg->ranges[i] < 0.8 ) {
         collisionFlag = true;

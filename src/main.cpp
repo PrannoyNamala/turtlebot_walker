@@ -31,11 +31,14 @@
 * @version 1.0
 * @copyright MIT License (c) 2021 Prannoy Namala
 */
- 
 
+// cppcheck-suppress missingInclude
 #include "ros/ros.h"
+// cppcheck-suppress missingInclude
 #include "sensor_msgs/LaserScan.h"
+// cppcheck-suppress missingInclude
 #include "geometry_msgs/Twist.h"
+// cppcheck-suppress missingInclude
 #include <walker.hpp>
 
 int main(int argc, char* argv[]) {

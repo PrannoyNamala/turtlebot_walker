@@ -1,6 +1,6 @@
 <launch>
 	
-	<arg name="record" default="false"/>
+	<arg name="record" default="0"/>
 	<arg name="duration" default="20"/>
 
 	<include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch">
