@@ -12,6 +12,13 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   turtlebot3_msgs
+  message_generation
+  tf
+)
+
+generate_messages(
+ DEPENDENCIES
+ std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -120,6 +127,9 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+
+add_executable(walker src/main.cpp src/walker.cpp)
+target_link_libraries(walker ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
