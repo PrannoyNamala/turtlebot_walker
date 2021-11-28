@@ -80,5 +80,6 @@ class Walker {
     * @return None
     */
     void walk();
-}
+};
 
+#endif  // INCLUDE_WALKER_HPP_

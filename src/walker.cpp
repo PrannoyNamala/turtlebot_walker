@@ -32,6 +32,7 @@
 * @copyright MIT License (c) 2021 Prannoy Namala
 */
 
+#include <array>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 #include "geometry_msgs/Twist.h"
@@ -41,7 +42,7 @@
 
 Walker::Walker() {
     // Publish velocity
-    velPub = n.advertise <geometry_msgs::Twist> ("/cmd_vel_mux/input/navi",
+    velPub = n.advertise <geometry_msgs::Twist> ("/cmd_vel",
     1000);
 
     // Subscibe to laser scan message
@@ -49,7 +50,7 @@ Walker::Walker() {
     &Walker::checkObstacle, this);
 
     // Set collision flag to false
-    collision_flag = false;
+    collisionFlag = false;
 }
 
 Walker::~Walker() {
@@ -65,10 +66,11 @@ Walker::~Walker() {
 
 void Walker::checkObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
     // Iterate over range values
-    collision_flag = false;
-    for (auto i : msg->ranges) {
-     if ( i < 0.8 ) {
-        collision_flag = true;
+    collisionFlag = false;
+    std::array<int,15> indices = {0,1,2,3,4,5,6,7,17,18,19,20,21,22,23};
+    for (auto i : indices) {
+     if ( msg->ranges[i] < 0.8 ) {
+        collisionFlag = true;
       }
     }
 }
@@ -77,7 +79,7 @@ void  Walker::walk() {
     ros::Rate loop_rate(10);
     while (ros::ok()) {
         // Check if collison flag is true
-        if (collision_flag) {
+        if (collisionFlag) {
             ROS_INFO("Obstacle Detected");
         // Set velocity if collision flag is true
             velocity.linear.x = 0.0;
